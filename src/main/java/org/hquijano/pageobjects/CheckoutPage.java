@@ -90,8 +90,10 @@ public class CheckoutPage extends AbstractComponent {
     }
 
     public void selectCountry(String countryName) {
+        Actions a = new Actions(driver);
     waitForVisibilityOfElement(By.cssSelector(".ta-results"));
-    countriesList.stream().filter(country -> country.getText().equalsIgnoreCase(countryName)).findFirst().orElse(null).click();
+    a.moveToElement(countriesList.stream().filter(country -> country.getText().equalsIgnoreCase(countryName)).findFirst().orElse(null)).click().build().perform();
+    //countriesList.stream().filter(country -> country.getText().equalsIgnoreCase(countryName)).findFirst().orElse(null);
     //selectCountry.clear();
         //selectCountry.click();
     }
