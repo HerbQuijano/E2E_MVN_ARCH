@@ -25,8 +25,9 @@ public class MyCartPage extends AbstractComponent {
     @FindBy(css = ".items h3")
     List<WebElement> productsInCart;
 
-    public void goToCheckoutPage(){
+    public CheckoutPage goToCheckoutPage(){
         checkoutButton.click();
+        return new CheckoutPage(driver);
     }
 
     public boolean assertProductAddedToCart(String productName){

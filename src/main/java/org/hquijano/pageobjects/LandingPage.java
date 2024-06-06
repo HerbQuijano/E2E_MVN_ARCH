@@ -1,10 +1,8 @@
 package org.hquijano.pageobjects;
 
 import org.hquijano.abstractcomponents.AbstractComponent;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -34,9 +32,13 @@ public class LandingPage extends AbstractComponent {
         driver.get("https://rahulshettyacademy.com/client");
     }
 
-    public void login(){
+    public void enterLoginDetails(){
         userEmail.sendKeys("ivmora@test.com");
         userPassword.sendKeys("ivetteMoral4!");
+    }
+
+    public CatalogPage goToCatalogPage(){
         loginButton.click();
+        return new CatalogPage(driver);
     }
 }

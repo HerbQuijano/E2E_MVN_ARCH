@@ -93,16 +93,14 @@ public class CheckoutPage extends AbstractComponent {
     int locationX = countriesList.stream().filter(country -> country.getText().equalsIgnoreCase(countryName)).findFirst().orElse(null).getLocation().getX();
     int locationY = countriesList.stream().filter(country -> country.getText().equalsIgnoreCase(countryName)).findFirst().orElse(null).getLocation().getY();
     JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-    //jsExecutor.executeScript("window.scrollTo(0, document.body.scrollHeight);");
     String jsExecutorString = "window.scrollTo("+locationX+","+locationY+")";
     jsExecutor.executeScript(jsExecutorString);
-
-        //a.moveToLocation(locationX, locationY).build().perform();
     a.moveToElement(countriesList.stream().filter(country -> country.getText().equalsIgnoreCase(countryName)).findFirst().orElse(null)).click().build().perform();
     }
 
-    public void goToConfirmationPage(){
+    public ConfirmationPage goToConfirmationPage(){
         placeOrderButton.click();
+        return new ConfirmationPage(driver);
     }
 
 

@@ -46,8 +46,9 @@ public class CatalogPage extends AbstractComponent {
         //waitForInvisibilityOfElement(toastContainer);
         waitForInvisibilityOfElement(spinner);
     }
-    public void goToCart(){
+    public MyCartPage goToCartPage(){
         cartButton.click();
+        return new MyCartPage(driver);
     }
 
 
