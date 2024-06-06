@@ -4,10 +4,11 @@ import java.time.Duration;
 import java.util.List;
 
 import org.hquijano.pageobjects.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -22,10 +23,10 @@ public class SubmitOrderTest{
         String nameOnCard = "Ivette Morales";
         String userEmail = "ivmora@test.com";
         String userCountryShort = "in";
-        String userCountry = "China";
+        String userCountry = "Martinique";
         String expectedMessage = "THANKYOU FOR THE ORDER.";
 
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new EdgeDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -43,10 +44,10 @@ public class SubmitOrderTest{
 
         catalogPage.getProductToAdd(productToAdd);
         catalogPage.addProductToCart(productToAdd);
-        catalogPage.clickOnCartButton();
+        catalogPage.goToCart();
 
         Assert.assertTrue(myCartPage.assertProductAddedToCart(productToAdd));
-        myCartPage.clickOnCheckoutButton();
+        myCartPage.goToCheckoutPage();
 
         checkoutPage.setCardNumber(creditCardNumber);
         checkoutPage.setCvvCode(cvvCode);
@@ -54,14 +55,12 @@ public class SubmitOrderTest{
         checkoutPage.selectExpDay(expiryDay);
         checkoutPage.setCvvCode(cvvCode);
         checkoutPage.setNameOnCard(nameOnCard);
-
         checkoutPage.setUserEmail(userEmail);
         checkoutPage.sendCountryShort(userCountryShort);
         checkoutPage.selectCountry(userCountry);
+        checkoutPage.goToConfirmationPage();
 
-        checkoutPage.placeOrder();
-
-        Assert.assertTrue(confirmationPage.assertOrderConfirmation(expectedMessage));
+        Assert.assertTrue(confirmationPage.assertOrderConfirmation(expectedMessage), "Expected message does not match with current message");
 
         confirmationPage.quitDriver();
     }

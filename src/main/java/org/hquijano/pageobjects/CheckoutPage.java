@@ -1,9 +1,7 @@
 package org.hquijano.pageobjects;
 
 import org.hquijano.abstractcomponents.AbstractComponent;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -90,15 +88,20 @@ public class CheckoutPage extends AbstractComponent {
     }
 
     public void selectCountry(String countryName) {
-        Actions a = new Actions(driver);
+    Actions a = new Actions(driver);
     waitForVisibilityOfElement(By.cssSelector(".ta-results"));
+    int locationX = countriesList.stream().filter(country -> country.getText().equalsIgnoreCase(countryName)).findFirst().orElse(null).getLocation().getX();
+    int locationY = countriesList.stream().filter(country -> country.getText().equalsIgnoreCase(countryName)).findFirst().orElse(null).getLocation().getY();
+    JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+    //jsExecutor.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+    String jsExecutorString = "window.scrollTo("+locationX+","+locationY+")";
+    jsExecutor.executeScript(jsExecutorString);
+
+        //a.moveToLocation(locationX, locationY).build().perform();
     a.moveToElement(countriesList.stream().filter(country -> country.getText().equalsIgnoreCase(countryName)).findFirst().orElse(null)).click().build().perform();
-    //countriesList.stream().filter(country -> country.getText().equalsIgnoreCase(countryName)).findFirst().orElse(null);
-    //selectCountry.clear();
-        //selectCountry.click();
     }
 
-    public void placeOrder(){
+    public void goToConfirmationPage(){
         placeOrderButton.click();
     }
 

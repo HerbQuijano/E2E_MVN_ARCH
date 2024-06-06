@@ -6,9 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 
 public class CatalogPage extends AbstractComponent {
@@ -31,6 +29,7 @@ public class CatalogPage extends AbstractComponent {
     By productsByList = By.cssSelector(".mb-3");
     By addToCart = By.cssSelector(".card-body button:last-of-type");
     By toastContainer = By.cssSelector("#toast-container");
+    By spinner = By.cssSelector(".ngx-spinner-overlay");
 
     public List<WebElement> getProductsList(){
         waitForElementsPresence(productsByList);
@@ -44,9 +43,10 @@ public class CatalogPage extends AbstractComponent {
     public void addProductToCart(String productName){
         WebElement productToAdd = getProductToAdd(productName);
         productToAdd.findElement(addToCart).click();
-        waitForInvisibilityOfElement(toastContainer);
+        //waitForInvisibilityOfElement(toastContainer);
+        waitForInvisibilityOfElement(spinner);
     }
-    public void clickOnCartButton(){
+    public void goToCart(){
         cartButton.click();
     }
 

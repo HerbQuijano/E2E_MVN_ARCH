@@ -4,7 +4,6 @@ import org.hquijano.abstractcomponents.AbstractComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class MyCartPage extends AbstractComponent {
     @FindBy(css = ".items h3")
     List<WebElement> productsInCart;
 
-    public void clickOnCheckoutButton(){
+    public void goToCheckoutPage(){
         checkoutButton.click();
     }
 
