@@ -10,7 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-public class SubmitOrderTest{
+public class SubmitOrderTest {
 
     public static void main(String[] args) {
         String productToAdd = "ZARA COAT 3";
@@ -30,24 +30,18 @@ public class SubmitOrderTest{
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         LandingPage landingPage = new LandingPage(driver);
-        CatalogPage catalogPage = new CatalogPage(driver);
-        MyCartPage myCartPage = new MyCartPage(driver);
-        CheckoutPage checkoutPage = new CheckoutPage(driver);
-        ConfirmationPage confirmationPage = new ConfirmationPage(driver);
-
         landingPage.open();
         landingPage.enterLoginDetails();
-        landingPage.goToCatalogPage();
 
+        CatalogPage catalogPage = landingPage.goToCatalogPage();
         List<WebElement> products = catalogPage.getProductsList();
-
         catalogPage.getProductToAdd(productToAdd);
         catalogPage.addProductToCart(productToAdd);
-        catalogPage.goToCartPage();
 
+        MyCartPage myCartPage = catalogPage.goToCartPage();
         Assert.assertTrue(myCartPage.assertProductAddedToCart(productToAdd));
-        myCartPage.goToCheckoutPage();
 
+        CheckoutPage checkoutPage = myCartPage.goToCheckoutPage();
         checkoutPage.setCardNumber(creditCardNumber);
         checkoutPage.setCvvCode(cvvCode);
         checkoutPage.selectExpMonth(expiryMonth);
@@ -57,11 +51,9 @@ public class SubmitOrderTest{
         checkoutPage.setUserEmail(userEmail);
         checkoutPage.sendCountryShort(userCountryShort);
         checkoutPage.selectCountry(userCountry);
-        checkoutPage.goToConfirmationPage();
 
+        ConfirmationPage confirmationPage = checkoutPage.goToConfirmationPage();
         Assert.assertTrue(confirmationPage.assertOrderConfirmation(expectedMessage), "Expected message does not match with current message");
-
         confirmationPage.quitDriver();
     }
-
 }

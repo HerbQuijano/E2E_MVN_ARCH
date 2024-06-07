@@ -9,16 +9,12 @@ import org.openqa.selenium.support.PageFactory;
 public class LandingPage extends AbstractComponent {
     WebDriver driver;
 
-    public LandingPage(WebDriver driver){
+    public LandingPage(WebDriver driver) {
         super(driver);
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    //WebElement userEmail = driver.findElement(By.id("userEmail"));
-    //WebElement userPassword = driver.findElement(By.id("userPassword"));
-
-    //PageFactory style
     @FindBy(id = "userEmail")
     WebElement userEmail;
 
@@ -28,16 +24,16 @@ public class LandingPage extends AbstractComponent {
     @FindBy(id = "login")
     WebElement loginButton;
 
-    public void open(){
+    public void open() {
         driver.get("https://rahulshettyacademy.com/client");
     }
 
-    public void enterLoginDetails(){
+    public void enterLoginDetails() {
         userEmail.sendKeys("ivmora@test.com");
         userPassword.sendKeys("ivetteMoral4!");
     }
 
-    public CatalogPage goToCatalogPage(){
+    public CatalogPage goToCatalogPage() {
         loginButton.click();
         return new CatalogPage(driver);
     }

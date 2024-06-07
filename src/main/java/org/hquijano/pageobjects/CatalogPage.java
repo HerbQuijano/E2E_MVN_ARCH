@@ -11,12 +11,10 @@ import java.util.List;
 
 public class CatalogPage extends AbstractComponent {
     WebDriver driver;
-    //WebDriverWait wait;
 
-    public CatalogPage(WebDriver driver){
+    public CatalogPage(WebDriver driver) {
         super(driver);
         this.driver = driver;
-        //this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         PageFactory.initElements(driver, this);
     }
 
@@ -31,25 +29,23 @@ public class CatalogPage extends AbstractComponent {
     By toastContainer = By.cssSelector("#toast-container");
     By spinner = By.cssSelector(".ngx-spinner-overlay");
 
-    public List<WebElement> getProductsList(){
+    public List<WebElement> getProductsList() {
         waitForElementsPresence(productsByList);
         return products;
     }
 
-    public WebElement getProductToAdd(String productToAdd){
+    public WebElement getProductToAdd(String productToAdd) {
         return getProductsList().stream().filter(product -> product.findElement(By.cssSelector("b")).getText().equals(productToAdd)).findFirst().orElse(null);
     }
 
-    public void addProductToCart(String productName){
+    public void addProductToCart(String productName) {
         WebElement productToAdd = getProductToAdd(productName);
         productToAdd.findElement(addToCart).click();
-        //waitForInvisibilityOfElement(toastContainer);
         waitForInvisibilityOfElement(spinner);
     }
-    public MyCartPage goToCartPage(){
+
+    public MyCartPage goToCartPage() {
         cartButton.click();
         return new MyCartPage(driver);
     }
-
-
 }

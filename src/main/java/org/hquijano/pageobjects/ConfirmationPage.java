@@ -25,7 +25,7 @@ public class ConfirmationPage extends AbstractComponent {
         return orderConfirmation.getText();
     }
 
-    public boolean assertOrderConfirmation(String message){
+    public boolean assertOrderConfirmation(String message) {
         return confirmationMessage.getText().equalsIgnoreCase(message);
     }
 }

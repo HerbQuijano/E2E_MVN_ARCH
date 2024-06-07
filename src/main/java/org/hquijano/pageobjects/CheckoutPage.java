@@ -11,9 +11,8 @@ import java.util.List;
 
 public class CheckoutPage extends AbstractComponent {
     WebDriver driver;
-    //WebDriverWait wait;
 
-    public CheckoutPage(WebDriver driver){
+    public CheckoutPage(WebDriver driver) {
         super(driver);
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -52,27 +51,27 @@ public class CheckoutPage extends AbstractComponent {
     private By results = By.cssSelector(".ta-results");
 
 
-    public void setCardNumber(String creditCardNumber){
+    public void setCardNumber(String creditCardNumber) {
         creditCardField.clear();
         creditCardField.sendKeys(creditCardNumber);
     }
 
-    public void setCvvCode(String cvvCode){
+    public void setCvvCode(String cvvCode) {
         cvvCodeField.clear();
         cvvCodeField.sendKeys(cvvCode);
     }
 
-    public void selectExpMonth(int month){
+    public void selectExpMonth(int month) {
         Select expMonthDrop = new Select(expMonth);
         expMonthDrop.selectByIndex(month);
     }
 
-    public void selectExpDay(int day){
+    public void selectExpDay(int day) {
         Select expDayDrop = new Select(expDay);
         expDayDrop.selectByIndex(day);
     }
 
-    public void setNameOnCard(String nameOnCard){
+    public void setNameOnCard(String nameOnCard) {
         nameOnCardField.clear();
         nameOnCardField.sendKeys(nameOnCard);
     }
@@ -88,21 +87,20 @@ public class CheckoutPage extends AbstractComponent {
     }
 
     public void selectCountry(String countryName) {
-    Actions a = new Actions(driver);
-    waitForVisibilityOfElement(results);
-    int locationX = countriesList.stream().filter(country -> country.getText().equalsIgnoreCase(countryName)).findFirst().orElse(null).getLocation().getX();
-    int locationY = countriesList.stream().filter(country -> country.getText().equalsIgnoreCase(countryName)).findFirst().orElse(null).getLocation().getY();
-    JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-    String jsExecutorString = "window.scrollTo("+locationX+","+locationY+")";
-    jsExecutor.executeScript(jsExecutorString);
-    a.moveToElement(countriesList.stream().filter(country -> country.getText().equalsIgnoreCase(countryName)).findFirst().orElse(null)).click().build().perform();
+        Actions a = new Actions(driver);
+        waitForVisibilityOfElement(results);
+        int locationX = countriesList.stream().filter(country -> country.getText().equalsIgnoreCase(countryName)).findFirst().orElse(null).getLocation().getX();
+        int locationY = countriesList.stream().filter(country -> country.getText().equalsIgnoreCase(countryName)).findFirst().orElse(null).getLocation().getY();
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        String jsExecutorString = "window.scrollTo(" + locationX + "," + locationY + ")";
+        jsExecutor.executeScript(jsExecutorString);
+        a.moveToElement(countriesList.stream().filter(country -> country.getText().equalsIgnoreCase(countryName)).findFirst().orElse(null)).click().build().perform();
     }
 
-    public ConfirmationPage goToConfirmationPage(){
+    public ConfirmationPage goToConfirmationPage() {
         placeOrderButton.click();
         return new ConfirmationPage(driver);
     }
-
 
 
 }
