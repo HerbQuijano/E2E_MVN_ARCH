@@ -1,4 +1,4 @@
-package org.hquijano;
+package org.hquijano.tests;
 
 import java.time.Duration;
 import java.util.List;
