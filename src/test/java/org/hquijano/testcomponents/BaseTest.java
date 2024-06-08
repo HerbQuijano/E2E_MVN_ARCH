@@ -53,11 +53,7 @@ public class BaseTest{
     public LandingPage launchApplication(){
         driver  = initializeDriver();
         landingPage = new LandingPage(driver);
-        landingPage.open();
-        landingPage.enterLoginDetails();
         return landingPage;
-
-
     }
 
     @AfterMethod

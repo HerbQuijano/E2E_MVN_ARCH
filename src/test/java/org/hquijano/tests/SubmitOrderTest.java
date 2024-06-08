@@ -12,7 +12,11 @@ public class SubmitOrderTest extends BaseTest {
 
     @Test
     public void submitOrder() {
+        String url = "https://rahulshettyacademy.com/client";
+        String username = "ivmora@test.com";
+        String password = "ivetteMoral4!";
         String productToAdd = "ZARA COAT 3";
+        String expectedProduct = "ZARA COAT 4";
         String creditCardNumber = "4242 4242 4242 4242";
         int expiryDay = 14;
         int expiryMonth = 5;
@@ -23,7 +27,7 @@ public class SubmitOrderTest extends BaseTest {
         String userCountry = "Martinique";
         String expectedMessage = "THANKYOU FOR THE ORDER.";
 
-        CatalogPage catalogPage = landingPage.goToCatalogPage();
+        CatalogPage catalogPage = landingPage.login(url, username, password);
         List<WebElement> products = catalogPage.getProductsList();
         catalogPage.getProductToAdd(productToAdd);
         catalogPage.addProductToCart(productToAdd);

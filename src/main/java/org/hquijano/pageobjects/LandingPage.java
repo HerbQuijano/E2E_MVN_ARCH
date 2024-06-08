@@ -27,16 +27,10 @@ public class LandingPage extends AbstractComponent {
     @FindBy(css = ".ng-trigger-flyInOut")
     WebElement loginError;
 
-    public void open() {
-        driver.get("https://rahulshettyacademy.com/client");
-    }
-
-    public void enterLoginDetails() {
-        userEmail.sendKeys("ivmora@test.com");
-        userPassword.sendKeys("ivetteMoral4!");
-    }
-
-    public CatalogPage goToCatalogPage() {
+    public CatalogPage login(String url, String username, String password) {
+        driver.get(url);
+        userEmail.sendKeys(username);
+        userPassword.sendKeys(password);
         loginButton.click();
         return new CatalogPage(driver);
     }
