@@ -88,7 +88,7 @@ public class CheckoutPage extends AbstractComponent {
 
     public void selectCountry(String countryName) {
         Actions a = new Actions(driver);
-        waitForVisibilityOfElement(results);
+        waitForElementsPresence(results);
         int locationX = countriesList.stream().filter(country -> country.getText().equalsIgnoreCase(countryName)).findFirst().orElse(null).getLocation().getX();
         int locationY = countriesList.stream().filter(country -> country.getText().equalsIgnoreCase(countryName)).findFirst().orElse(null).getLocation().getY();
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;

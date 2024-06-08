@@ -1,18 +1,17 @@
 package org.hquijano.tests;
 
 import org.hquijano.pageobjects.*;
-import org.openqa.selenium.WebDriver;
+import org.hquijano.testcomponents.BaseTest;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
-import java.time.Duration;
 import java.util.List;
 
-public class SubmitOrderTest {
+public class SubmitOrderTest extends BaseTest {
 
-    public static void main(String[] args) {
+    @Test
+    public void submitOrder() {
         String productToAdd = "ZARA COAT 3";
         String creditCardNumber = "4242 4242 4242 4242";
         int expiryDay = 14;
@@ -23,15 +22,6 @@ public class SubmitOrderTest {
         String userCountryShort = "in";
         String userCountry = "Martinique";
         String expectedMessage = "THANKYOU FOR THE ORDER.";
-
-        WebDriver driver = new FirefoxDriver();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-        LandingPage landingPage = new LandingPage(driver);
-        landingPage.open();
-        landingPage.enterLoginDetails();
 
         CatalogPage catalogPage = landingPage.goToCatalogPage();
         List<WebElement> products = catalogPage.getProductsList();
@@ -54,6 +44,5 @@ public class SubmitOrderTest {
 
         ConfirmationPage confirmationPage = checkoutPage.goToConfirmationPage();
         Assert.assertTrue(confirmationPage.assertOrderConfirmation(expectedMessage), "Expected message does not match with current message");
-        confirmationPage.quitDriver();
     }
 }

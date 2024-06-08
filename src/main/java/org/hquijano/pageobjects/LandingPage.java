@@ -24,6 +24,9 @@ public class LandingPage extends AbstractComponent {
     @FindBy(id = "login")
     WebElement loginButton;
 
+    @FindBy(css = ".ng-trigger-flyInOut")
+    WebElement loginError;
+
     public void open() {
         driver.get("https://rahulshettyacademy.com/client");
     }
@@ -36,5 +39,10 @@ public class LandingPage extends AbstractComponent {
     public CatalogPage goToCatalogPage() {
         loginButton.click();
         return new CatalogPage(driver);
+    }
+
+    public String getErrorMessage(){
+        waitForVisibilityOfElement(loginError);
+        return loginError.getText();
     }
 }
