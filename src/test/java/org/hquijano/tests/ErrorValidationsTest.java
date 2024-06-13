@@ -1,8 +1,6 @@
 package org.hquijano.tests;
 
 import org.hquijano.pageobjects.CatalogPage;
-import org.hquijano.pageobjects.CheckoutPage;
-import org.hquijano.pageobjects.ConfirmationPage;
 import org.hquijano.pageobjects.MyCartPage;
 import org.hquijano.testcomponents.BaseTest;
 import org.openqa.selenium.WebElement;
@@ -11,7 +9,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class ErrorValidations extends BaseTest {
+public class ErrorValidationsTest extends BaseTest {
     String url = "https://rahulshettyacademy.com/client";
 
     @Test
