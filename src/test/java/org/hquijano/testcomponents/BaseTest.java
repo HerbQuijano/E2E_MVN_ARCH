@@ -49,14 +49,14 @@ public class BaseTest{
         return driver;
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public LandingPage launchApplication(){
         driver  = initializeDriver();
         landingPage = new LandingPage(driver);
         return landingPage;
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDown(){
         //driver.close();
         driver.quit();

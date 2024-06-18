@@ -12,7 +12,7 @@ import java.util.List;
 public class ErrorValidationsTest extends BaseTest {
     String url = "https://rahulshettyacademy.com/client";
 
-    @Test
+    @Test(groups = {"ErrorHandling"})
     public void loginErrorValidation() {
         String username = "ivmora@test.com";
         String password = "divetteMoral4!";
