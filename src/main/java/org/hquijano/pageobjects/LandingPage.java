@@ -27,8 +27,8 @@ public class LandingPage extends AbstractComponent {
     @FindBy(css = ".ng-trigger-flyInOut")
     WebElement loginError;
 
-    public CatalogPage login(String url, String username, String password) {
-        driver.get(url);
+    public CatalogPage login(String username, String password) {
+        driver.get("https://rahulshettyacademy.com/client");
         userEmail.sendKeys(username);
         userPassword.sendKeys(password);
         loginButton.click();

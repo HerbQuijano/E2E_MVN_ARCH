@@ -4,49 +4,39 @@ import org.hquijano.pageobjects.*;
 import org.hquijano.testcomponents.BaseTest;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
 public class SubmitOrderTest extends BaseTest {
 
-    @Test
-    public void submitOrder() {
-        String url = "https://rahulshettyacademy.com/client";
-        String username = "ivmora@test.com";
-        String password = "ivetteMoral4!";
-        String productToAdd = "ZARA COAT 3";
-        String expectedProduct = "ZARA COAT 4";
-        String creditCardNumber = "4242 4242 4242 4242";
-        int expiryDay = 14;
-        int expiryMonth = 5;
-        String cvvCode = "123";
-        String nameOnCard = "Ivette Morales";
-        String userEmail = "ivmora@test.com";
-        String userCountryShort = "in";
-        String userCountry = "Martinique";
-        String expectedMessage = "THANKYOU FOR THE ORDER.";
+    @Test(dataProvider = "getData")
+    public void submitOrder(String userName, String password, String product) {
 
-        CatalogPage catalogPage = landingPage.login(url, username, password);
+        CatalogPage catalogPage = landingPage.login(userName, password);
         List<WebElement> products = catalogPage.getProductsList();
-        catalogPage.getProductToAdd(productToAdd);
-        catalogPage.addProductToCart(productToAdd);
+        catalogPage.getProductToAdd(product);
+        catalogPage.addProductToCart(product);
 
         MyCartPage myCartPage = catalogPage.goToCartPage();
-        Assert.assertTrue(myCartPage.assertProductAddedToCart(productToAdd));
+        Assert.assertTrue(myCartPage.assertProductAddedToCart(product));
 
         CheckoutPage checkoutPage = myCartPage.goToCheckoutPage();
-        checkoutPage.setCardNumber(creditCardNumber);
-        checkoutPage.setCvvCode(cvvCode);
-        checkoutPage.selectExpMonth(expiryMonth);
-        checkoutPage.selectExpDay(expiryDay);
-        checkoutPage.setCvvCode(cvvCode);
-        checkoutPage.setNameOnCard(nameOnCard);
-        checkoutPage.setUserEmail(userEmail);
-        checkoutPage.sendCountryShort(userCountryShort);
-        checkoutPage.selectCountry(userCountry);
+        checkoutPage.enterCardData();
 
         ConfirmationPage confirmationPage = checkoutPage.goToConfirmationPage();
-        Assert.assertTrue(confirmationPage.assertOrderConfirmation(expectedMessage), "Expected message does not match with current message");
+        Assert.assertTrue(confirmationPage.assertOrderConfirmation("THANKYOU FOR THE ORDER."), "Expected message does not match with current message");
     }
+
+    @DataProvider
+    public Object[][] getData() {
+        return new Object[][] {
+                {"ivmora@test.com", "ivetteMoral4!", "ZARA COAT 3"},
+                {"tessalonian22@test.com", "Tess4lon3!", "ADIDAS ORIGINAL"}
+        };
+
+    }
+
+
 }
