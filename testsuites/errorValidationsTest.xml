@@ -14,6 +14,9 @@
         </classes>
     </test>
     <test verbose="2" preserve-order="true" thread-count="5" name="Error Validations Test">
+        <parameter name="user" value="ivmora@test.com"></parameter>
+        <parameter name="pass" value="ivetteMoral4!"></parameter>
+        <parameter name="productToAdd" value="ZARA COAT 3"></parameter>
         <classes>
             <class name="org.hquijano.tests.ErrorValidationsTest">
             </class>

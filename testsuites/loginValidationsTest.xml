@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Login Test Suite" parallel = "tests">
+    <groups>
+        <run>
+            <include name="LoginTest"/>
+        </run>
+    </groups>
+    <test verbose="2" preserve-order="true" thread-count="5" name="Login Validations Test">
+        <classes>
+            <class name="org.hquijano.tests.ErrorValidationsTest">
+            </class>
+        </classes>
+    </test>
+</suite>
