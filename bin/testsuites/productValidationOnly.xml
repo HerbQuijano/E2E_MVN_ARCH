@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Product Validation" parallel = "tests">
+    <groups>
+        <run>
+            <include name="Products"/>
+        </run>
+    </groups>
+    <test verbose="2" preserve-order="true" thread-count="5" name="Product Validations Test">
+        <parameter name="username" value="ivmora@test.com"></parameter>
+        <parameter name="password" value="ivetteMoral4!"></parameter>
+        <parameter name="productToAdd" value="ZARA COAT 3"></parameter>
+        <classes>
+            <class name="org.hquijano.tests.ErrorValidationsTest"/>
+        </classes>
+    </test>
+</suite>

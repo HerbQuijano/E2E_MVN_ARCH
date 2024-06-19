@@ -6,7 +6,7 @@
             <include name="LoginTest"/>
         </run>
     </groups>
-    <test verbose="2" preserve-order="true" thread-count="3" name="Login Validations Test">
+    <test verbose="2" preserve-order="true" thread-count="5" name="Login Validations Test">
         <classes>
             <class name="org.hquijano.tests.ErrorValidationsTest">
             </class>

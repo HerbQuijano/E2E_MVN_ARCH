@@ -5,14 +5,15 @@
         <run>
             <include name="ErrorHandling"/>
         </run>
+
     </groups>
-    <test verbose="2" preserve-order="true" thread-count="5" name="Error Order Test">
+    <test verbose="2" preserve-order="true" thread-count="5" name="Submit Order Test">
         <classes>
-            <class name="org.hquijano.tests.ErrorValidationsTest">
+            <class name="org.hquijano.tests.SubmitOrderTest">
             </class>
         </classes>
     </test>
-    <test verbose="2" preserve-order="true" thread-count="5" name="Coat Validations Test">
+    <test verbose="2" preserve-order="true" thread-count="5" name="Error Validations Test">
         <parameter name="user" value="ivmora@test.com"></parameter>
         <parameter name="pass" value="ivetteMoral4!"></parameter>
         <parameter name="productToAdd" value="ZARA COAT 3"></parameter>

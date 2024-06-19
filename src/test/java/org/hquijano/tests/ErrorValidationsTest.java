@@ -83,10 +83,6 @@ public class ErrorValidationsTest extends BaseTest {
         File jsonFile = new File(filepath);
         List<Map<String, String>> testData = objectMapper.readValue(jsonFile, List.class);
 
-//        for (Map<String, String> s : testData){
-//            System.out.println(s.entrySet());
-//        }
-
         Object[][] data = new Object[testData.size()][2]; // Two-dimensional array for username and password
 
         for (int i = 0; i < testData.size(); i++) {
