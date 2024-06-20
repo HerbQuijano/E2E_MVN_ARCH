@@ -1,6 +1,5 @@
 package org.hquijano.testcomponents;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -9,13 +8,7 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
-        // Capture screenshot on test failure
         System.out.println("Test Case Failed");
-        // Capture screenshot on test failure
-        Object currentClass = result.getInstance();
-        WebDriver driver = ((BaseTest) currentClass).driver;
-        ((BaseTest) currentClass).captureScreenshot(result.getName());
-
     }
 
     @Override
@@ -27,6 +20,7 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestSuccess(ITestResult result) {
         // Code for test success
+        System.out.println("Test Success");
     }
 
     @Override
@@ -41,11 +35,12 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onStart(ITestContext context) {
-        // Code for start
+
     }
 
     @Override
     public void onFinish(ITestContext context) {
         // Code for finish
     }
+
 }

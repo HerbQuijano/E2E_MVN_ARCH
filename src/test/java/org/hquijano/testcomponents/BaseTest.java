@@ -67,19 +67,6 @@ public class BaseTest{
 
     @AfterMethod(alwaysRun = true)
     public void tearDown(){
-        //driver.close();
         driver.quit();
     }
-
-    public void captureScreenshot(String testName) {
-        // Create a screenshot file with a timestamp
-        String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        try {
-            Files.copy(screenshot.toPath(), Paths.get("screenshots", testName + "_" + timestamp + ".png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 }
