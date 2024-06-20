@@ -1,6 +1,8 @@
 package org.hquijano.testcomponents;
 
 import org.hquijano.pageobjects.LandingPage;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -9,9 +11,16 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.Properties;
 
 public class BaseTest{
@@ -60,6 +69,17 @@ public class BaseTest{
     public void tearDown(){
         //driver.close();
         driver.quit();
+    }
+
+    public void captureScreenshot(String testName) {
+        // Create a screenshot file with a timestamp
+        String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        try {
+            Files.copy(screenshot.toPath(), Paths.get("screenshots", testName + "_" + timestamp + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

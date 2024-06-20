@@ -2,16 +2,19 @@ package org.hquijano.tests;
 
 import org.hquijano.pageobjects.*;
 import org.hquijano.testcomponents.BaseTest;
+import org.hquijano.testcomponents.TestListener;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
+@Listeners(TestListener.class)
 public class SubmitOrderTest extends BaseTest {
 
-    @Test(dataProvider = "getData")
+    @Test(groups = "Products", dataProvider = "getData")
     public void submitOrder(String userName, String password, String product) {
 
         CatalogPage catalogPage = landingPage.login(userName, password);
@@ -26,7 +29,7 @@ public class SubmitOrderTest extends BaseTest {
         checkoutPage.enterCardData();
 
         ConfirmationPage confirmationPage = checkoutPage.goToConfirmationPage();
-        Assert.assertTrue(confirmationPage.assertOrderConfirmation("THANKYOU FOR THE ORDER."), "Expected message does not match with current message");
+        Assert.assertTrue(confirmationPage.assertOrderConfirmation("THANKYOU FOR YOUR ORDER."), "Expected message does not match with current message");
     }
 
     @DataProvider

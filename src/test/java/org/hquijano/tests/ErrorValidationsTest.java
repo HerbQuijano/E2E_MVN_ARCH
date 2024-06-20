@@ -3,6 +3,7 @@ package org.hquijano.tests;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hquijano.pageobjects.CatalogPage;
 import org.hquijano.pageobjects.MyCartPage;
+import org.hquijano.resources.JsonDataProvider;
 import org.hquijano.testcomponents.BaseTest;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -79,9 +80,7 @@ public class ErrorValidationsTest extends BaseTest {
 
     @DataProvider
     public Object[][] invalidLoginDataJson() throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        File jsonFile = new File(filepath);
-        List<Map<String, String>> testData = objectMapper.readValue(jsonFile, List.class);
+        List<Map<String, String>> testData = JsonDataProvider.readJsonFile(filepath);
 
         Object[][] data = new Object[testData.size()][2]; // Two-dimensional array for username and password
 
